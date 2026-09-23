@@ -28,4 +28,3 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceProduct=$(PRODUCT_SYSTEM_NAME)
 
 # Flags
-TARGET_INCLUDES_OEM_App := true
