@@ -58,10 +58,10 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         RefreshUtils.initialize(context);
         ThermalUtils.startService(context);
 
-        // Override HDR types to enable Dolby Vision
+        // Advertise the panel's HDR types
         final DisplayManager dm = context.getSystemService(DisplayManager.class);
         dm.overrideHdrTypes(android.view.Display.DEFAULT_DISPLAY,
-                new int[] {HdrCapabilities.HDR_TYPE_DOLBY_VISION, HdrCapabilities.HDR_TYPE_HDR10,
+                new int[] {HdrCapabilities.HDR_TYPE_HDR10,
                         HdrCapabilities.HDR_TYPE_HLG, HdrCapabilities.HDR_TYPE_HDR10_PLUS});
     }        
 }

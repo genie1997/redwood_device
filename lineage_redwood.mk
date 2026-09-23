@@ -29,4 +29,3 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 # Flags
 TARGET_INCLUDES_OEM_App := true
-TARGET_INCLUDES_DolbyVision := true
