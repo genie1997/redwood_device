@@ -24,3 +24,8 @@ Camera  | 108 MP main, 8 MP ultra-wide angle, 2 MP telemacro, 16 MP front
 ## Device picture
 
 ![Poco X5 Pro 5G/Redmi Note 12 Pro Speed](https://i.blogs.es/98a725/poco-x5-pro/1366_2000.jpeg "Poco X5 Pro 5G/Redmi Note 12 Pro Speed")
+
+## Credits
+
+Based on the redwood device tree by [Harshit Rai](https://github.com/heyharshitrai)
+([Redwood-AOSP](https://github.com/Redwood-AOSP/android_device_xiaomi_redwood)).
