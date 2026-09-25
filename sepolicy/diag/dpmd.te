@@ -1,0 +1,3 @@
+# dpmd is a client of the diag HAL
+hal_client_domain(vendor_dpmd, vendor_hal_diaghal)
+hal_client_domain(vendor_dpmd, hal_allocator)
