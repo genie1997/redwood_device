@@ -1,0 +1,2 @@
+# Xiaomi addition, not in plat_property_contexts
+ro.product.odm.marketname   u:object_r:build_odm_prop:s0 exact string
