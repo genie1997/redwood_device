@@ -49,7 +49,7 @@ case "$target" in
                 if [ $sku_ver -eq 1 ]; then
                     setprop vendor.media.target_variant "_yupik_v1"
                 else
-                    setprop vendor.media.target_variant "_yupik_v0"
+                    setprop vendor.media.target_variant "_yupik_v1"
                 fi
                 setprop vendor.netflix.bsp_rev "Q7325-SPY-33758-1"
                 ;;
