@@ -62,15 +62,6 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/touch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_touch"
-                android:visibility="invisible" />
-
-            <ImageView
                 android:id="@+id/state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
