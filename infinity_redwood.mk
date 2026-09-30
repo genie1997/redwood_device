@@ -21,8 +21,11 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 PRODUCT_SYSTEM_NAME := redwood_global
 PRODUCT_SYSTEM_DEVICE := redwood
 
+REDWOOD_STOCK_FP := POCO/redwood_global/redwood:14/UKQ1.240624.001/OS2.0.17.0.UMSMIXM:user/release-keys
+
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="redwood_global-user 14 UKQ1.240624.001 OS2.0.17.0.UMSMIXM release-keys" \
-    BuildFingerprint=POCO/redwood_global/redwood:14/UKQ1.240624.001/OS2.0.17.0.UMSMIXM:user/release-keys \
+    BuildFingerprint=$(REDWOOD_STOCK_FP) \
+    BuildSystemFingerprint=$(REDWOOD_STOCK_FP) \
     DeviceName=$(PRODUCT_SYSTEM_DEVICE) \
     DeviceProduct=$(PRODUCT_SYSTEM_NAME)
