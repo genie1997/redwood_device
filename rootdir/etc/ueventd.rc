@@ -137,6 +137,12 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/class/qcom-battery     input_suspend            0660    system  system
 /sys/class/qcom-battery     night_charging           0660    system  system
 
+# Thermal
+/sys/class/thermal/thermal_message   sconfig        0664   system        system
+/sys/class/thermal/thermal_message   balance_mode   0664   system        system
+/sys/class/thermal/thermal_message   charger_temp   0664   system        system
+/sys/class/thermal/thermal_message   flash_state    0664   cameraserver  cameraserver
+
 # mius iio devices
 /dev/iio:device*                                        0660   system     system
 /sys/bus/iio/devices/iio:device* buffer/enable                  0600 system system
