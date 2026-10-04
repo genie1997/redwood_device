@@ -76,6 +76,12 @@ DEVICE_MANIFEST_FILE += \
     $(DEVICE_PATH)/hidl/c2_manifest_vendor.xml \
     $(if $(TARGET_NFC_SUPPORTED_SKUS),$(DEVICE_PATH)/hidl/manifest_no_nfc.xml,)
 
+# The yupik SKU manifest replaces manifest.xml at runtime, so it carries the full base list plus keymaster
+DEVICE_MANIFEST_SKUS += yupik
+DEVICE_MANIFEST_YUPIK_FILES += \
+    $(DEVICE_MANIFEST_FILE) \
+    $(DEVICE_PATH)/hidl/manifest_keymaster.xml
+
 ifneq ($(TARGET_NFC_SUPPORTED_SKUS),)
 ODM_MANIFEST_SKUS += $(TARGET_NFC_SUPPORTED_SKUS)
 $(foreach nfc_sku, $(call to-upper, $(TARGET_NFC_SUPPORTED_SKUS)), \
