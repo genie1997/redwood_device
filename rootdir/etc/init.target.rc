@@ -182,12 +182,6 @@ on charger
     setprop sys.usb.configfs 1
     write /sys/module/lpm_levels/parameters/sleep_disabled N
 
-service vendor.lowi /vendor/bin/lowirpcd
-   class core
-   user system
-   group system wakelock
-   capabilities BLOCK_SUSPEND
-
 service vendor.pd_mapper /vendor/bin/pd-mapper
     class core
     user system
