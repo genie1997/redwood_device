@@ -19,6 +19,7 @@ package org.lineageos.settings.refreshrate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.UserHandle;
 import android.view.Display;
 
@@ -32,6 +33,8 @@ public final class RefreshUtils {
 
     private static final String KEY_PEAK_REFRESH_RATE = "peak_refresh_rate";
     private static final String KEY_MIN_REFRESH_RATE = "min_refresh_rate";
+    protected static final Uri PEAK_URI = Settings.System.getUriFor(KEY_PEAK_REFRESH_RATE);
+    protected static final Uri MIN_URI = Settings.System.getUriFor(KEY_MIN_REFRESH_RATE);
     private Context mContext;
 
     protected static final int STATE_DEFAULT = 0;
@@ -133,6 +136,31 @@ public final class RefreshUtils {
             state = STATE_EXTREME;
         }
         return state;
+    }
+
+    // Keep min <= peak by moving the other end, and remember the user's own choice for screen off/on
+    protected void syncRates(boolean peakChanged) {
+        float maxrate = Settings.System.getFloat(mContext.getContentResolver(), KEY_PEAK_REFRESH_RATE, REFRESH_STATE_DEFAULT);
+        float minrate = Settings.System.getFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, REFRESH_STATE_DEFAULT);
+
+        if (peakChanged && !isAppInList && defaultMinRate == defaultMaxRate && minrate == defaultMinRate) {
+            // A fixed rate stays fixed: the minimum follows the new peak up or down
+            minrate = maxrate;
+            Settings.System.putFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, minrate);
+        } else if (minrate > maxrate) {
+            if (peakChanged) {
+                minrate = maxrate;
+                Settings.System.putFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, minrate);
+            } else {
+                maxrate = minrate;
+                Settings.System.putFloat(mContext.getContentResolver(), KEY_PEAK_REFRESH_RATE, maxrate);
+            }
+        }
+
+        if (!isAppInList) {
+            defaultMaxRate = maxrate;
+            defaultMinRate = minrate;
+        }
     }
 
     protected static void setDefaultRefreshRate(Context context) {

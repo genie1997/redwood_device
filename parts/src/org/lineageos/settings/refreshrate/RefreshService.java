@@ -27,8 +27,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
 import android.os.RemoteException;
 
@@ -57,6 +60,13 @@ public class RefreshService extends Service {
             }
         };
 
+    private final ContentObserver mRateObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            mRefreshUtils.syncRates(RefreshUtils.PEAK_URI.equals(uri));
+        }
+    };
+
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -77,6 +87,8 @@ public class RefreshService extends Service {
             // Do nothing
         }
         registerReceiver();
+        getContentResolver().registerContentObserver(RefreshUtils.PEAK_URI, false, mRateObserver);
+        getContentResolver().registerContentObserver(RefreshUtils.MIN_URI, false, mRateObserver);
         super.onCreate();
     }
 
@@ -84,6 +96,7 @@ public class RefreshService extends Service {
     public void onDestroy() {
         if (DEBUG) Log.d(TAG, "Destroying service");
         unregisterReceiver();
+        getContentResolver().unregisterContentObserver(mRateObserver);
         try {
             ActivityTaskManager.getService().unregisterTaskStackListener(mTaskListener);
         } catch (RemoteException e) {
