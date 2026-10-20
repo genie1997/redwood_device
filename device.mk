@@ -385,7 +385,8 @@ $(foreach sku_out, $(TARGET_COPY_OUT_NFC_SKU_PERMISSIONS), \
 PRODUCT_PACKAGES += \
     CarrierConfigOverlayRedwood \
     LineageSDKOverlayRedwood \
-    TelephonyOverlayRedwood
+    TelephonyOverlayRedwood \
+    UpdaterOverlayRedwood
 
 PRODUCT_PACKAGES += \
     FrameworkOverlayRedwood \
