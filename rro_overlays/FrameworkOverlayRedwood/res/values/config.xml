@@ -601,6 +601,24 @@
          available on some devices. -->
     <bool name="config_enableHapticTextHandle">true</bool>
 
+    <!-- Full scale for audio-coupled haptics; zero turns them off. -->
+    <item name="config_hapticChannelMaxVibrationAmplitude" format="float" type="dimen">1.0</item>
+
+    <!-- Default vibration intensities: medium; Settings still offers low and high. -->
+    <integer name="config_defaultAlarmVibrationIntensity">2</integer>
+    <integer name="config_defaultHapticFeedbackIntensity">2</integer>
+    <integer name="config_defaultKeyboardVibrationIntensity">2</integer>
+    <integer name="config_defaultMediaVibrationIntensity">2</integer>
+    <integer name="config_defaultNotificationVibrationIntensity">2</integer>
+    <integer name="config_defaultRingVibrationIntensity">2</integer>
+
+    <!-- Vibration scale for the low, medium and high intensities. -->
+    <string-array name="config_vibrationIntensityScaleFactors" translatable="false">
+        <item>0.51</item>
+        <item>2.0</item>
+        <item>3.0</item>
+    </string-array>
+
     <!-- Whether the device enable the standalone (SA) mode of 5G NR.-->
     <bool name="config_telephony5gStandalone">true</bool>
 
