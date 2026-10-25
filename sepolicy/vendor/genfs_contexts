@@ -6,6 +6,7 @@ genfscon sysfs /devices/platform/soc/soc:fingerprint_fpc                        
 
 # USB
 genfscon sysfs /devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,ucsi/typec u:object_r:sysfs_typec:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,ucsi/power_supply/ucsi-source-psy-soc:qcom,pmic_glink:qcom,ucsi1 u:object_r:vendor_sysfs_battery_supply:s0
 
 # Torch control
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:torch_0/brightness u:object_r:sysfs_torch:s0
@@ -33,6 +34,15 @@ genfscon sysfs /devices/platform/soc/abb0000.qcom,evass/subsys2/wakeup u:object_
 # Power and volume down keys
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-00/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300:pwrkey/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-00/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300:resin/wakeup u:object_r:sysfs_wakeup:s0
+# Power and volume down keys under the newer SPMI node names, plus RTC, tsens, display and serial wakeups
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/0-00/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300:pwrkey/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/0-00/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300/c440000.qcom,spmi:qcom,pmk8350@0:pon_hlos@1300:resin/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/0-00/c440000.qcom,spmi:qcom,pmk8350@0:rtc@6100/rtc/rtc0/alarmtimer.0.auto/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c263000.tsens/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c265000.tsens/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/9c0000.qcom,qupv3_0_geni_se/99c000.qcom,qup_uart/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_1_geni_se/a94000.spi/spi_master/spi0/spi0.0/wakeup u:object_r:sysfs_wakeup:s0
 # note: Labelling /devices/platform/soc/soc:fingerprint_fpc/wakeup relabels the wakeup_enable node
 genfscon sysfs /devices/platform/soc/soc:fingerprint_fpc/wakeup/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:fingerprint_goodix/wakeup/wakeup u:object_r:sysfs_wakeup:s0
