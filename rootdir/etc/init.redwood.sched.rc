@@ -1,0 +1,3 @@
+on init
+    # RT tasks get no utilization floor unless they set one (SurfaceFlinger does)
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
