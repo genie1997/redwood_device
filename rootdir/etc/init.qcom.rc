@@ -44,19 +44,11 @@ on early-boot
     write /sys/class/drm/card0-DSI-1/status "detect"
     write /sys/module/drm/parameters/vblankoffdelay -1
 
-    chown system graphics /sys/devices/virtual/hdcp/msm_hdcp/min_level_change
-    chmod 0660 /sys/devices/virtual/hdcp/msm_hdcp/min_level_change
-
     # SSR setup
     write /sys/bus/msm_subsys/devices/subsys0/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys1/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys4/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys5/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys6/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys7/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys8/restart_level "related"
 
     chown system system /mnt/vendor/persist/data/pfm/licenses
     chmod 0775 /mnt/vendor/persist/data/pfm/licenses
@@ -66,8 +58,6 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/type
     chmod 0660 /sys/class/rfkill/rfkill0/state
-
-    chown system system /sys/kernel/boot_slpi/ssr
 
     # This location is used by QCRIL to host UNIX domain
     # socket files used for internal IPC within QCRIL
@@ -224,26 +214,8 @@ on property:sys.boot_completed=1
     # Enable UFS clock gating back
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
 
-    # WDSP FW boot sysfs node used by STHAL
-    chown media audio /sys/kernel/wdsp0/boot
-    chown media audio /sys/kernel/wcd_cpe0/fw_name
-
     # Reinit lmkd to reconfigure lmkd properties
     setprop lmkd.reinit 1
-
-    # Power hal
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us
-    chown system system /sys/devices/system/cpu/cpu7/cpufreq/schedutil/down_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us
-    chmod 0664 /sys/devices/system/cpu/cpu7/cpufreq/schedutil/down_rate_limit_us
 
 service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
     class core

@@ -28,7 +28,6 @@ on property:vendor.post_boot.parsed=1
     write /dev/cpuset/background/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3
-    write /dev/cpuset/audio-app/cpus 0-3
 
     # Configure uclamp
     write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
@@ -46,9 +45,6 @@ on property:vendor.post_boot.parsed=1
     write /dev/cpuctl/nnapi-hal/cpu.shares 20480
     write /dev/cpuctl/rt/cpu.shares 20480
     write /dev/cpuctl/top-app/cpu.shares 20480
-
-    # Disable multiple kswapd threads
-    write /proc/sys/vm/kswapd_threads 1
 
     # Dynamically set IRQ affinity for KGSL and DRM
     exec u:r:vendor_qti_init_shell:s0 -- /vendor/bin/init.lahaina.perf.sh
