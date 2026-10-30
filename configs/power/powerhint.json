@@ -123,28 +123,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "GPUForceRailOn",
-      "Paths": [
-        "/sys/class/kgsl/kgsl-3d0/force_rail_on"
-      ],
-      "Values": [
-        "1",
-        "0"
-      ],
-      "ResetOnInit": true
-    },
-    {
-      "Name": "GPUForceClkOn",
-      "Paths": [
-        "/sys/class/kgsl/kgsl-3d0/force_clk_on"
-      ],
-      "Values": [
-        "1",
-        "0"
-      ],
-      "ResetOnInit": true
-    },
-    {
       "Name": "GPUIdleTimer",
       "Paths": [
         "/sys/class/kgsl/kgsl-3d0/idle_timer"
@@ -158,7 +136,7 @@
     {
       "Name": "CPUBWHystTriggerCount",
       "Paths": [
-        "/sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/bw_hwmon/hyst_trigger_count"
+        "/sys/devices/system/cpu/bus_dcvs/LLCC/90b6400.qcom,bwmon-llcc/hyst_trigger_count"
       ],
       "Values": [
         "0",
@@ -169,7 +147,7 @@
     {
       "Name": "CPUBWHistMemory",
       "Paths": [
-        "/sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/bw_hwmon/hist_memory"
+        "/sys/devices/system/cpu/bus_dcvs/LLCC/90b6400.qcom,bwmon-llcc/hist_memory"
       ],
       "Values": [
         "0",
@@ -180,7 +158,7 @@
     {
       "Name": "CPUBWHystLength",
       "Paths": [
-        "/sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/bw_hwmon/hyst_length"
+        "/sys/devices/system/cpu/bus_dcvs/LLCC/90b6400.qcom,bwmon-llcc/hyst_length"
       ],
       "Values": [
         "0",
@@ -189,26 +167,26 @@
       "ResetOnInit": true
     },
     {
-      "Name": "CPUBWMinFreq",
+      "Name": "LLCCMinFreq",
       "Paths": [
-        "/sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/min_freq"
+        "/sys/devices/system/cpu/bus_dcvs/LLCC/boost_freq"
       ],
       "Values": [
-        "12298",
-        "9155",
-        "4577"
+        "806000",
+        "600000",
+        "150000"
       ],
       "ResetOnInit": true
     },
     {
-      "Name": "LLCCBWMinFreq",
+      "Name": "DDRMinFreq",
       "Paths": [
-        "/sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq"
+        "/sys/devices/system/cpu/bus_dcvs/DDR/boost_freq"
       ],
       "Values": [
-        "6515",
-        "3879",
-        "762"
+        "1708000",
+        "1017000",
+        "200000"
       ],
       "ResetOnInit": true
     },
@@ -262,15 +240,15 @@
     },
     {
       "PowerHint": "INTERACTION",
-      "Node": "CPUBWMinFreq",
+      "Node": "LLCCMinFreq",
       "Duration": 58,
-      "Value": "9155"
+      "Value": "600000"
     },
     {
       "PowerHint": "INTERACTION",
-      "Node": "LLCCBWMinFreq",
+      "Node": "DDRMinFreq",
       "Duration": 58,
-      "Value": "3879"
+      "Value": "1017000"
     },
     {
       "PowerHint": "LAUNCH",
@@ -310,27 +288,15 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "CPUBWMinFreq",
+      "Node": "LLCCMinFreq",
       "Duration": 1000,
-      "Value": "12298"
+      "Value": "806000"
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "LLCCBWMinFreq",
+      "Node": "DDRMinFreq",
       "Duration": 1000,
-      "Value": "6515"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "GPUForceClkOn",
-      "Duration": 1000,
-      "Value": "1"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "GPUForceRailOn",
-      "Duration": 1000,
-      "Value": "1"
+      "Value": "1708000"
     },
     {
       "PowerHint": "LAUNCH",
