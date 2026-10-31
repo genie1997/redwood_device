@@ -30,36 +30,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #=============================================================================
 
-function configure_zram_parameters() {
-	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-	MemTotal=${MemTotalStr:16:8}
-
-	# Zram disk - 75% for Go and < 2GB devices .
-	# For >2GB Non-Go devices, size = 50% of RAM size. Limit the size to 4GB.
-
-	let RamSizeGB="( $MemTotal / 1048576 ) + 1"
-	diskSizeUnit=M
-	if [ $RamSizeGB -le 2 ]; then
-		let zRamSizeMB="( $RamSizeGB * 1024 ) * 3 / 4"
-	else
-		let zRamSizeMB="( $RamSizeGB * 1024 ) / 2"
-	fi
-
-	# use MB avoid 32 bit overflow
-	if [ $zRamSizeMB -gt 4096 ]; then
-		let zRamSizeMB=4096
-	fi
-
-	echo lz4 > /sys/block/zram0/comp_algorithm
-
-	if [ -f /sys/block/zram0/disksize ]; then
-		echo "$zRamSizeMB""$diskSizeUnit" > /sys/block/zram0/disksize
-
-		mkswap /dev/block/zram0
-		swapon /dev/block/zram0 -p 32758
-	fi
-}
-
 function configure_read_ahead_kb_values() {
 	dmpts=$(ls /sys/block/*/queue/read_ahead_kb | grep -e dm)
 	ra_kb=128
@@ -89,7 +59,6 @@ function configure_memory_parameters() {
 	# Set allocstall_threshold to 0 for all targets.
 	#
 
-	configure_zram_parameters
 	configure_read_ahead_kb_values
 	echo 60 > /proc/sys/vm/swappiness
 
