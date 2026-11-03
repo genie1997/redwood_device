@@ -1,5 +1,9 @@
 # Bluetooth
 persist.vendor.btstack.enable.lpa=true
 
+# Blur
+ro.launcher.blur.appLaunch?=0
+ro.sf.blurs_are_expensive?=1
+
 # DPM
 persist.vendor.dpm.feature=11
