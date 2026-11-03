@@ -62,7 +62,7 @@ int32_t getTorchStrengthLevelExt() {
 }
 
 void setTorchStrengthLevelExt(int32_t torchStrength, bool enabled) {
-    set(TOGGLE_SWITCH, 0);
+    // The camera HAL drives the switch, writing 0 to it would drop its LED trigger.
     auto node = kTorchLedPath + "/" + TORCH_BRIGHTNESS;
     set(node, torchStrength);
     if (enabled)
