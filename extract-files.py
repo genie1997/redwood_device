@@ -65,6 +65,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libcrypto_shim.so'),
     'vendor/lib64/android.hardware.secure_element@1.0-impl.so': blob_fixup()
         .remove_needed('android.hidl.base@1.0.so'),
+    'vendor/lib64/libgf_hal.so': blob_fixup()
+        .sig_replace('17 D5 00 94', '1F 20 03 D5'),
     'vendor/lib64/libmialgoengine.so' : blob_fixup()
         .remove_needed('android.hardware.graphics.allocator@3.0.so')
         .remove_needed('vendor.qti.hardware.display.allocator@3.0.so'),
