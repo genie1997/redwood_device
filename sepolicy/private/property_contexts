@@ -1,2 +1,10 @@
 # Xiaomi addition, not in plat_property_contexts
 ro.product.odm.marketname   u:object_r:build_odm_prop:s0 exact string
+
+# Camera
+ro.camera.req.fmq.size        u:object_r:camera_config_prop:s0 exact int
+ro.camera.res.fmq.size        u:object_r:camera_config_prop:s0 exact int
+persist.camera.aiasd.isovalue u:object_r:camera_config_prop:s0 exact int
+
+# Sensors
+persist.sensor.sardisable     u:object_r:sensors_hal_prop:s0 exact
