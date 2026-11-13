@@ -62,6 +62,13 @@ public class RefreshSettingsFragment extends PreferenceFragment
     private RefreshUtils mRefreshUtils;
     private RecyclerView mAppsRecyclerView;
 
+    // The panels run at 60 and 120 Hz only
+    private static final int[] STATES = {
+            RefreshUtils.STATE_DEFAULT,
+            RefreshUtils.STATE_MEDIUM,
+            RefreshUtils.STATE_EXTREME
+    };
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
@@ -190,14 +197,25 @@ public class RefreshSettingsFragment extends PreferenceFragment
         switch (state) {
             case RefreshUtils.STATE_MEDIUM:
                 return R.drawable.ic_refresh_60;
-            case RefreshUtils.STATE_HIGH:
-                return R.drawable.ic_refresh_90;
             case RefreshUtils.STATE_EXTREME:
                 return R.drawable.ic_refresh_120;
             case RefreshUtils.STATE_DEFAULT:
             default:
                 return R.drawable.ic_refresh_default;
         }
+    }
+
+    private int getPositionForState(int state) {
+        // A 90 Hz choice from an older build runs at 60 Hz
+        if (state == RefreshUtils.STATE_HIGH) {
+            state = RefreshUtils.STATE_MEDIUM;
+        }
+        for (int i = 0; i < STATES.length; i++) {
+            if (STATES[i] == state) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
@@ -225,7 +243,6 @@ public class RefreshSettingsFragment extends PreferenceFragment
         private final int[] items = {
                 R.string.refresh_default,
                 R.string.refresh_medium,
-                R.string.refresh_high,
                 R.string.refresh_extreme
         };
 
@@ -306,10 +323,11 @@ public class RefreshSettingsFragment extends PreferenceFragment
             holder.title.setOnClickListener(v -> holder.mode.performClick());
             mApplicationsState.ensureIcon(entry);
             holder.icon.setImageDrawable(entry.icon);
-            int packageState = mRefreshUtils.getStateForPackage(entry.info.packageName);
-            holder.mode.setSelection(packageState, false);
+            int selection = getPositionForState(
+                    mRefreshUtils.getStateForPackage(entry.info.packageName));
+            holder.mode.setSelection(selection, false);
             holder.mode.setTag(entry);
-            holder.stateIcon.setImageResource(getStateDrawable(packageState));
+            holder.stateIcon.setImageResource(getStateDrawable(STATES[selection]));
             holder.stateIcon.setOnClickListener(v -> holder.mode.performClick());
         }
 
@@ -329,8 +347,8 @@ public class RefreshSettingsFragment extends PreferenceFragment
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             final ApplicationsState.AppEntry entry = (ApplicationsState.AppEntry) parent.getTag();
             int currentState = mRefreshUtils.getStateForPackage(entry.info.packageName);
-            if (currentState != position) {
-                mRefreshUtils.writePackage(entry.info.packageName, position);
+            if (currentState != STATES[position]) {
+                mRefreshUtils.writePackage(entry.info.packageName, STATES[position]);
                 notifyDataSetChanged();
             }
         }
