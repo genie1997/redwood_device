@@ -111,10 +111,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <!-- Config for explicit call transfer support for an IMS call -->
         <boolean name="carrier_allow_transfer_ims_call_bool" value="true" />
         
-        <!-- Allow VoLTE, WFC and VoNR by default -->
+        <!-- Allow VoLTE and WFC by default -->
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_wfc_ims_available_bool" value="true" />
-        <boolean name="vonr_enabled_bool" value="true" />
         
     </carrier_config>
 
