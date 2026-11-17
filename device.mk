@@ -396,6 +396,7 @@ $(foreach sku_out, $(TARGET_COPY_OUT_NFC_SKU_PERMISSIONS), \
 PRODUCT_PACKAGES += \
     CarrierConfigOverlayRedwood \
     LineageSDKOverlayRedwood \
+    SettingsSearchOverlayRedwood \
     TelephonyOverlayRedwood \
     UpdaterOverlayRedwood
 
